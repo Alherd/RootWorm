@@ -1,8 +1,4 @@
-package com.rpos.rootworm;
-
-/**
- * Created by Olgerd on 14.05.2018.
- */
+package com.rpos.rootworm.entity;
 
 public class MyData {
     private String text;

@@ -1,11 +1,16 @@
-package com.rpos.rootworm;
+package com.rpos.rootworm.activities;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
+import com.rpos.rootworm.entity.MyData;
+import com.rpos.rootworm.R;
+import com.rpos.rootworm.adapter.CustomAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,7 +26,7 @@ import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
     private static final String URL = "http://192.168.43.87:8000/api/messages/";
-
+    LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(this);
     private RecyclerView recyclerView;
     private CustomAdapter adapter;
     private List<MyData> data_list;
@@ -33,10 +38,12 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         data_list = new ArrayList<>();
+        adapter = new CustomAdapter(data_list);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(mLinearLayoutManager);
+
         load_data_from_server();
 
-        adapter = new CustomAdapter(this, data_list);
-        recyclerView.setAdapter(adapter);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -58,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                         .build();
                 try {
                     Response response = client.newCall(request).execute();
-
+                    data_list.clear();
                     JSONArray array = new JSONArray(response.body().string());
 
                     for (int i = 0; i < array.length(); i++) {

@@ -1,21 +1,25 @@
-package com.rpos.rootworm;
+package com.rpos.rootworm.adapter;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.rpos.rootworm.entity.MyData;
+import com.rpos.rootworm.R;
+
 import java.util.List;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
 
-    private Context context;
     private List<MyData> my_data;
 
-    public CustomAdapter(Context context, List<MyData> my_data) {
-        this.context = context;
+    public CustomAdapter(List<MyData> my_data) {
+        this.my_data = my_data;
+    }
+
+    public void setMy_data(List<MyData> my_data) {
         this.my_data = my_data;
     }
 
