@@ -26,7 +26,7 @@ import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
     private static final String URL = "http://192.168.43.87:8000/api/messages/";
-    LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(this);
+    private LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(this);
     private RecyclerView recyclerView;
     private CustomAdapter adapter;
     private List<MyData> data_list;
